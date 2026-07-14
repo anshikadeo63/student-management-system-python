@@ -1,9 +1,27 @@
 import os
+import json
 from functions.student import *
 from functions.attendance import *
 from functions.marks import *
 from functions.report import *
 from functions.analysis import *
+
+def LoadData():
+    try:
+        with open("student_info.json", "r") as f:
+            return json.load(f)
+
+    except FileNotFoundError:
+        return {}
+
+    except json.JSONDecodeError:
+        return {}
+
+def SaveData(student_dict):
+    with open("student_info.json", "w") as f:
+        json.dump(student_dict, f, indent=4)
+
+student_dict = LoadData()
 
 def LoopFormat():
     os.system("cls")
@@ -13,8 +31,6 @@ def LoopFormat():
     user_choice = input("(A) Student Management\n(B) Marks Management\n(C) Attendance Management\n(D) Performance Analysis\n(E) Reports\n(F) Exit\n---------------------------------------------------\nEnter choice: ")
     print()   
     return user_choice.upper()
-
-student_dict = {}
 
 user_choice = LoopFormat()
 
@@ -27,14 +43,17 @@ while user_choice != "F":
 
             if user_choice_2 == "A":
                 AddStudent(student_dict)
+                SaveData(student_dict)
                 input("\nPress Enter to continue...")
 
             elif user_choice_2 == "B":
                 DeleteStudent(student_dict)
+                SaveData(student_dict)
                 input("\nPress Enter to continue...")
 
             elif user_choice_2 == "C":
                 UpdateStudent(student_dict)
+                SaveData(student_dict)
                 input("\nPress Enter to continue...")
 
             elif user_choice_2 == "D":
@@ -60,10 +79,12 @@ while user_choice != "F":
 
             if user_choice_3 == "A":
                 AddMarks(student_dict)
+                SaveData(student_dict)
                 input("\nPress Enter to continue...")
 
             elif user_choice_3 == "B":
                 UpdateMarks(student_dict)
+                SaveData(student_dict)
                 input("\nPress Enter to continue...")
 
             elif user_choice_3 == "C":
@@ -94,10 +115,12 @@ while user_choice != "F":
             if user_choice_4 == "A":
                 AddAttendance(student_dict)
                 input("\nPress Enter to continue...")
+                SaveData(student_dict)
 
             elif user_choice_4 == "B":
                 UpdateAttendance(student_dict)
                 input("\nPress Enter to continue...")
+                SaveData(student_dict)
 
             elif user_choice_4 == "C":
                 AttendanceWarning(student_dict)
@@ -165,6 +188,5 @@ while user_choice != "F":
         input("\nPress Enter to continue...")
 
     user_choice = LoopFormat()
-
 
 print("Thank you for using Student Management System!")
