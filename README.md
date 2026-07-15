@@ -141,7 +141,7 @@ python main_file.py
 
 **Anshika Deo**
 
-Computer Science Student | University of Central Florida 
+Computer Science Student 
 
 GitHub: [anshikadeo63](https://github.com/anshikadeo63)
 
