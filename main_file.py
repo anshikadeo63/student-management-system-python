@@ -16,6 +16,8 @@ def LoadData():
 
     except json.JSONDecodeError:
         return {}
+    except Exception:
+        return {}
 
 def SaveData(student_dict):
     with open("student_info.json", "w") as f:
@@ -114,13 +116,13 @@ while user_choice != "F":
 
             if user_choice_4 == "A":
                 AddAttendance(student_dict)
-                input("\nPress Enter to continue...")
                 SaveData(student_dict)
+                input("\nPress Enter to continue...")
 
             elif user_choice_4 == "B":
                 UpdateAttendance(student_dict)
-                input("\nPress Enter to continue...")
                 SaveData(student_dict)
+                input("\nPress Enter to continue...")
 
             elif user_choice_4 == "C":
                 AttendanceWarning(student_dict)
